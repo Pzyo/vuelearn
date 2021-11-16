@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<h2>{{fullName}}</h2>
+		</div>
+		
+		<script src="../js/vue.js"></script>
+		<script type="text/javascript">
+			const app = new Vue({
+				el: '#app',
+				data: {
+					firstName: 'Tony',
+					lastName: 'Tomas'
+				},
+				computed: {
+					// 其实这种是简写
+					// fullName: function () {
+					// 	return this.firstName + ' ' + this.lastName
+					// }
+					
+					// 完整写法
+					fullName: {
+						// 一般情况下，不会设置set属性，因为不希望别人给属性设置值，所以可以删除或注释掉
+						set: function (newValue) {
+							// console.log('---', newValue);
+							const name = newValue.split(' ');
+							this.firstName = name[0];
+							this.lastName = name[1];
+						},
+						get: function () {
+							return this.firstName + ' ' + this.lastName
+						}
+					}
+				}
+			})
+		</script>
+	</body>
+</html>
