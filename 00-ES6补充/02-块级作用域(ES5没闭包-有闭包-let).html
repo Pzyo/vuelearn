@@ -11,7 +11,7 @@
 		<button type="button">按钮4</button>
 		
 		<script type="text/javascript">			
-			// 情况1：ES5没有闭包
+			// 情况1：ES5中没有闭包
 			// var btns = document.getElementsByTagName('button')
 			// for (var i=0; i<btns.length; i++) {
 			// 	btns[i].addEventListener('click', function () {
@@ -19,7 +19,7 @@
 			// 	})
 			// }
 			
-			// 情况2：ES5使用闭包
+			// 情况2：ES5中使用闭包
 			// for (var i=0; i<btns.length; i++) {
 			// 	(function (i) {
 			// 		btns[i].addEventListener('click', function () {
@@ -28,7 +28,7 @@
 			// 	})(i)
 			// }
 			
-			// 情况3： ES6使用let
+			// 情况3： ES6中使用let
 			const btns = document.getElementsByTagName('button');
 			for (let i=0; i<btns.length; i++) {
 				btns[i].addEventListener('click', function () {
