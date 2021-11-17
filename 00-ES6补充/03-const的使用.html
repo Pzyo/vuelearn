@@ -6,11 +6,23 @@
 	</head>
 	<body>
 		<script type="text/javascript">
-		  // 1. 注意点一：一旦给const修改的标识符被赋值后，不可修改
-			const name = 'pzyo';
-			name = 'hello';  // 出现错误：UncaughtTypeError: Assignment to constant variable.
+		  // 1. 注意一：一旦给const修改的标识符被赋值后，不可修改
+			// const name = 'pzyo';
+			// name = 'hello';  // 出现错误：UncaughtTypeError: Assignment to constant variable.
 			
-			// 2. 
+			// 2. 注意二：在使用const定义标识符，必须进行赋值
+			// const name;  // 出现错误：SyntaxError: Missing initializer in const declaration
+			
+			// 3. 注意三：常量的含义是指向的对象不能修改，但是可以修改对象内部的属性
+			const obj = {
+				name: 'pzyo',
+				age: 23,
+				height: 170
+			}
+			
+			obj.name = 'tony';
+			obj.age = 30;
+			obj.height = 188;
 		</script>
 	</body>
 </html>
