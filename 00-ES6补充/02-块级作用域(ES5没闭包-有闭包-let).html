@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<button type="button">按钮1</button>
+		<button type="button">按钮2</button>
+		<button type="button">按钮3</button>
+		<button type="button">按钮4</button>
+		
+		<script type="text/javascript">			
+			// 情况1：ES5没有闭包
+			// var btns = document.getElementsByTagName('button')
+			// for (var i=0; i<btns.length; i++) {
+			// 	btns[i].addEventListener('click', function () {
+			// 		console.log('第' + i + '个按钮被点击了')
+			// 	})
+			// }
+			
+			// 情况2：ES5使用闭包
+			// for (var i=0; i<btns.length; i++) {
+			// 	(function (i) {
+			// 		btns[i].addEventListener('click', function () {
+			// 			console.log('第' + i + '个按钮被点击了')
+			// 		})
+			// 	})(i)
+			// }
+			
+			// 情况3： ES6使用let
+			const btns = document.getElementsByTagName('button');
+			for (let i=0; i<btns.length; i++) {
+				btns[i].addEventListener('click', function () {
+					console.log('第' + i + '个按钮被点击了')
+				})
+			}
+		</script>
+	</body>
+</html>

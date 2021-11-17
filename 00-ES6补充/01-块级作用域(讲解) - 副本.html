@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<button type="button">按钮1</button>
+		<button type="button">按钮2</button>
+		<button type="button">按钮3</button>
+		<button type="button">按钮4</button>
+		
+		<script type="text/javascript">
+			// 1. 变量作用域：变量在什么范围内是可用的.
+			// {
+			// 	var name = 'Pzyo';
+			// 	console.log(name);
+			// }
+			// console.log(name);
+			
+			// 2. 没有块级作用域引起的问题：if的块级
+			// var func;
+			// if (true) {
+			// 	var name = 'Pzyo';
+			// 	func = function () {
+			// 		console.log(name);
+			// 	}
+			// 	// func()
+			// }
+			// name = 'kobe'
+			// func()
+			// console.log(name)
+			
+			// 3. 没有块级作用域引起的问题：for的块级
+			// var btns = document.getElementsByTagName('button')
+			// for (var i=0; i<btns.length; i++) {
+			// 	btns[i].addEventListener('click', function () {
+			// 		console.log('第' + i + '个按钮被点击了')
+			// 结果点击按钮一直输出：第4个按钮被点击了
+			// 原因：点击事件属于回调，但是回调时i已经被for循环给改掉，但i又没有作用域，所以i会全部变成4
+			// 	})
+			// }
+			// for (var i=0; i<btns.length; i++) {
+			// 	ES5解决var i的方法：使用闭包，因为函数有作用域
+			// 	(function (i) {
+			// 		btns[i].addEventListener('click', function () {
+			// 			console.log('第' + i + '个按钮被点击了')
+			// 		})
+			// 	})(i)
+			// }
+			// ES5之前因为if和for都没有块级作用域的概念，所以很多时候，
+			// 都必须借助于function的作用域来解决应用外面变量的问题
+			// ES6中，加入了let，let是具有if和for的块级作用域
+			const btns = document.getElementsByTagName('button');
+			for (let i=0; i<btns.length; i++) {
+				btns[i].addEventListener('click', function () {
+					console.log('第' + i + '个按钮被点击了')
+				})
+			}
+		</script>
+	</body>
+</html>
