@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<!-- 1. .stop修饰符的使用，调用event.stopPropagation()防止冒泡 -->
+			<div @click="divClick">
+				aaaa
+				<!-- <button type="button" @click="btnClick">按钮</button> -->
+				<!-- 点击按钮，会输出btnClick，因为事件冒泡的原因，div的事件也会被触发，从而也会输出divClick -->
+				<!-- 现想达到的效果：点击aaaa才会出现divClick，点击按钮只输出btnClick -->
+				<!-- 即，需要阻止按钮点击事件的冒泡 -->
+				<!-- 在w3c中，需要在方法定义时加上形参event，以及方法的最后使用event.stopPropagation()去阻止冒泡 -->
+				<!-- 而在vue中加上修饰符.stop即可实现阻止事件冒泡，实际也是调用event.stopPropagation() -->
+				<button type="button" @click.stop="btnClick">按钮</button>
+			</div>
+			
+			<!-- 2. .prevent修饰符的使用，调用event.preventDefault()取消默认事件 -->
+			<form action="baidu" method="post">
+				<!-- <input type="submit" value="提交" @click="submitClick" /> -->
+				<!-- 正常情况下是会收集信息后先触发方法输出submitClick，然后自动提交 -->
+				<!-- 使用修饰符.prevent可以取消submit的自动提交，转而只触发我们设置的方法 -->
+				<!-- 此时我们可以转为自己手动提交，如使用ajax等方式 -->
+				<input type="submit" value="提交" @click.prevent="submitClick" />
+			</form>
+			
+			<!-- 3. .监听某个键盘的按键 -->
+			<!-- <input type="text" @keyup="keyUp" /> -->
+			<!-- 上述情况是监听所有键盘按键的事件，需要注意的是键盘松开的状态 -->
+			<!-- 只监听回车键的事件 -->
+			<input type="text" @keyup.enter="keyUp" />
+			<!-- 其他键盘别名：.tab .delete .esc .space .up .down .left .right -->
+			
+			<!-- 4. .once修饰符的使用，只触发一次回调 -->
+			<button type="button" @click.once="btn2Click">按钮</button>
+			<!-- 第一次点击按钮是输出btn2Click，后续再次点击无输出 -->
+		</div>
+
+		<script src="../js/vue.js"></script>
+		<script type="text/javascript">
+			const app = new Vue({
+				el: '#app',
+				data: {
+					message: '你好啊'
+				},
+				methods: {
+					btnClick(event) {
+						console.log('btnClick');
+						// event.stopPropagation()
+					},
+					divClick() {
+						console.log('divClick');
+					},
+					submitClick() {
+						console.log('submitClick');
+					},
+					keyUp() {
+						console.log('keyUp')
+					},
+					btn2Click() {
+						console.log('btn2Click')
+					}
+				}
+			})
+		</script>
+	</body>
+</html>
