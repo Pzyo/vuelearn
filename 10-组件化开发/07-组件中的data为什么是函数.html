@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<cpn></cpn>
+			<cpn></cpn>
+		</div>
+		
+		<template id="cpn">
+			<div>
+				<h2>当前计数：{{counter}}</h2>
+				<button type="button" @click="increment">+</button>
+				<button type="button" @click="decrement">-</button>
+			</div>
+		</template>
+		
+		<script src="../js/vue.js"></script>
+		<script type="text/javascript">
+			// 1. 注册组件
+			Vue.component('cpn', {
+				template: '#cpn',
+				data() {
+					return {
+						counter: 0
+					}
+				},
+				// data: {   如果组件的data属性不是一个函数，那各个组件实例创建后指向counter的内存地址都一直
+				// 	counter: 0  造成的后果就是一个组件改变了counter的值，其他组件的也会变化
+				// },           而使用函数就不会有这种情况，因为函数返回对象的内存地址对于各个组件实例都是不一样，相互不影响数据
+				methods: {
+					increment() {
+						this.counter++
+					},
+					decrement() {
+						this.counter--
+					}
+				}
+			})
+		
+			const app = new Vue({
+				el: '#app',
+				data: {
+					message: '你好啊'
+				}
+			})
+		</script>
+	</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>		
+		<div id="app">
+			<!-- 3. 使用组件 -->
+			<my-cpn></my-cpn>
+		</div>
+		
+		<script src="../js/vue.js"></script>
+		<script type="text/javascript">
+			// ES6语法
+			// const str = 'abc' +
+			// 						'cde'
+			// const str2 = `abc
+			// cde
+			// `
+			// 字符串定义使用``符号可以直接换行
+		
+			// 1. 创建组件构造器对象
+			const cpnContructor = Vue.extend({
+				template: `
+				<div>
+				  <h2>我是标题</h2>
+					<p>我是内容，哈哈哈</p>
+					<p>我是内容，呵呵呵</p>
+				</div>
+				`
+			})
+			
+			// 2. 注册组件
+			Vue.component('my-cpn', cpnContructor)
+			
+			const app = new Vue({
+				el: '#app',
+				data: {
+					message: '你好啊'
+				}
+			})
+		</script>
+	</body>
+</html>
