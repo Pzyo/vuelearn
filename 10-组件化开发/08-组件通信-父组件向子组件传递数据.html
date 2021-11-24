@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<!-- <cpn v-bind:cmovies="movies" :cmessage="message"></cpn> -->
+			<cpn :cmessage="message" :cfruits="fruits"></cpn>
+		</div>
+		
+		<template id="cpn">
+			<div>
+				<p>{{cmovies}}</p>
+				<h2>{{cmessage}}</h2>
+				<h2>{{author}}</h2>
+			</div>
+		</template>
+		
+		<script src="../js/vue.js"></script>
+		<script type="text/javascript">
+			function Person(firstName, lastName) {
+				console.log(firstName + lastName)
+			}
+		
+			// 父传子：props
+			const cpn = {
+				template: '#cpn',
+				// props: ['cmovies', 'cmessage']
+				props: {
+					// 1. 类型限制
+					// cmovies: Array,
+					// cmessage: String
+					// cmessage: [String, Number]
+					
+					// 2. 提供默认值，以及必传值
+					cmessage: {
+						// type: String,
+						type: [String, Number],  // 多种类型时使用数组定义
+						default: 'aaa',
+						required: true  // 在使用cpn组件标签时，指定必须使用v-bind绑定的属性
+					},
+					// 类型是对象或者数组时，设置默认值必须是一个函数
+					cmovies: {
+						type: Array,
+						// default: []     // vue高版本中不支持设置这种写法
+						default() {
+							return []
+						}
+					},
+					// 自定义验证函数
+					cfruits: {
+						// 验证函数，如果传入值非数组内的就会报错Invalid prop: custom validator check failed for prop "cfruits"
+						validator(value) {
+							return ['apple', 'banana', 'orange'].indexOf(value) !== -1
+						}
+					},
+					// 自定义类型
+					author: {
+						type: Person,
+						default() {
+							return Person('xxx', 'yyy')
+						}
+					}
+				}
+			}
+		
+			const app = new Vue({
+				el: '#app',
+				data: {
+					message: '你好啊',
+					movies: ['海王', '海贼王', '火影', '哆啦A梦'],
+					fruits: 'orange'
+				},
+				components: {
+					// es6增强写法，cpn作为
+					cpn
+				}
+			})
+		</script>
+	</body>
+</html>
