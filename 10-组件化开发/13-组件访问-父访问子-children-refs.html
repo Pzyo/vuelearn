@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<cpn></cpn>
+			<cpn></cpn>
+			<cpn ref="aaa"></cpn>
+			<button type="button" @click="btnClick">按钮</button>
+		</div>
+		
+		<template id="cpn">
+			<div>我是子组件</div>
+		</template>
+		
+		<script src="../js/vue.js"></script>
+		<script type="text/javascript">
+			const app = new Vue({
+				el: '#app',
+				data: {
+					
+				},
+				components: {
+					cpn: {
+						template: '#cpn',
+						data() {
+							return {
+								name: '我是子组件的name'
+							}
+						},
+						methods: {
+							showMessage() {
+								console.log('showMessage')
+							}
+						}
+					}
+				},
+				methods: {
+					btnClick() {
+						// 1. $children
+						// 由于需求问题，不能一直确保索引位置，所以实际开发中很少使用
+						// console.log(this.$children);
+						// for (let c of this.$children) {
+						// 	c.showMessage()
+						// 	console.log(c.name)
+						// }
+						
+						// 2. $refs -> 对象类型，默认是一个空的对象，使用需要在子组件标签处添加ref
+						// 开发中一般使用这个去实现父组件访问子组件
+						console.log(this.$refs.aaa.name)
+					}
+				}
+			})
+		</script>
+	</body>
+</html>
