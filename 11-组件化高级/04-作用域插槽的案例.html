@@ -6,14 +6,23 @@
 	</head>
 	<body>
 		<div id="app">
-			<cpn v-show="isShow"></cpn>  <!-- 组件显示，因为vue实例的isShow为true -->
+			<cpn></cpn>
+			<cpn>
+				<!-- 目的是获取子组件中的pLanguages -->
+				<template slot-scope="slot">
+					<!-- <span v-for="item in slot.data">{{item}} - </span> -->
+					<span>{{slot.data.join(' - ')}}</span>
+				</template>
+			</cpn>
 		</div>
 		
 		<template id="cpn">
 			<div>
-				<h2>我是子组件</h2>
-				<p>我是内容，哈哈哈</p>
-				<button type="button" v-show="isShow">按钮</button>  <!-- 按钮不显示，因为组件的isShow为false -->
+				<slot :data="pLanguages">
+					<ul v-for="p in pLanguages">
+						<li>{{p}}</li>
+					</ul>
+				</slot>
 			</div>
 		</template>
 		
@@ -22,15 +31,14 @@
 			const app = new Vue({
 				el: '#app',
 				data: {
-					message: '你好啊',
-					isShow: true
+					message: '你好啊'
 				},
 				components: {
 					cpn: {
 						template: '#cpn',
 						data() {
 							return {
-								isShow: false
+								pLanguages: ['JavaScript', 'c++', 'Java', 'Python', 'Golang', 'c#']
 							}
 						}
 					}
