@@ -562,63 +562,69 @@ function updateLink (link, options, obj) {
 
 /***/ }),
 /* 2 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__js_info_js__ = __webpack_require__(4);
+
+
+var _info = __webpack_require__(3);
+
 // 1.使用CommonJS的模块化规范导入
-const {add, mul} = __webpack_require__(3);
+var _require = __webpack_require__(4),
+    add = _require.add,
+    mul = _require.mul;
 
 console.log(add(10, 20));
 console.log(mul(30, 40));
 
 // 2.使用ES6的模块化规范导入
 
-console.log(__WEBPACK_IMPORTED_MODULE_0__js_info_js__["c" /* name */]);
-console.log(__WEBPACK_IMPORTED_MODULE_0__js_info_js__["a" /* age */]);
-console.log(__WEBPACK_IMPORTED_MODULE_0__js_info_js__["b" /* height */]);
+console.log(_info.name);
+console.log(_info.age);
+console.log(_info.height);
 
 // 3.依赖css文件
 __webpack_require__(5);
 
 // 4.依赖less文件
 __webpack_require__(10);
-document.writeln('<h2>你好啊，pzyo</h2>')
+document.writeln('<h2>你好啊，pzyo</h2>');
 
 /***/ }),
 /* 3 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+// ES6的模块化导出
+var name = exports.name = 'pzyo';
+var age = exports.age = 23;
+var height = exports.height = 170;
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 
 function add(num1, num2) {
-	return num1 + num2
+	return num1 + num2;
 }
 
 function mul(num1, num2) {
-	return num1 * num2
+	return num1 * num2;
 }
 
 // CommonJS的模块化导出
 module.exports = {
-	add,
-	mul
-}
-
-/***/ }),
-/* 4 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-// ES6的模块化导出
-const name = 'pzyo'
-/* harmony export (immutable) */ __webpack_exports__["c"] = name;
-
-const age = 23
-/* harmony export (immutable) */ __webpack_exports__["a"] = age;
-
-const height = 170
-/* harmony export (immutable) */ __webpack_exports__["b"] = height;
-
+	add: add,
+	mul: mul
+};
 
 /***/ }),
 /* 5 */
@@ -714,7 +720,7 @@ module.exports = function escape(url) {
 /* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "47b14d7a9b5efacdce0b74b966632841.jpg";
+module.exports = __webpack_require__.p + "img/test2.47b14d7a.jpg";
 
 /***/ }),
 /* 9 */
