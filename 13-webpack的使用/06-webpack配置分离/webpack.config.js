@@ -1,7 +1,10 @@
 // 使用node去获取项目文件的绝对路径
 const path = require('path')
 
-const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const { VueLoaderPlugin } = require('vue-loader')
+const Webpack = require('webpack')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const UglifyjsWebpackPlugin = require('uglifyjs-webpack-plugin')
 
 module.exports = {
 	entry: './src/main.js',
@@ -9,7 +12,7 @@ module.exports = {
 		// __dirname是一个全局变量，保存的当前文件所在的绝对路径
 		path: path.resolve(__dirname, 'dist'),  // 只能写绝对路径
 		filename: 'bundle.js',
-		publicPath: 'dist/'
+		// publicPath: 'dist/'
 	},
 	module: {
 		rules: [
@@ -72,6 +75,21 @@ module.exports = {
 		}
 	},
 	plugins: [
-		new VueLoaderPlugin()
-	]
+		new VueLoaderPlugin(),
+		new Webpack.BannerPlugin('最终版权归aaa所有'),
+		new HtmlWebpackPlugin({
+			template: 'index.html'
+		}),
+		new UglifyjsWebpackPlugin()
+	],
+	devServer: {
+		// 为哪一个文件夹提供本地服务，默认是根文件夹，我们这里要填写./dist
+		contentBase: './dist',
+		// 页面实时刷新
+		inline: true,
+		// 端口号：默认是8080
+		port: 8080,
+		// 在SPA页面中，依赖HTML5的history模式
+		// historyApiFallback: 
+	}
 }
